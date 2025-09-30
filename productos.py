@@ -1,34 +1,45 @@
-class Producto:
-    def __init__(self):
+from abc import ABC, abstractmethod
+
+class Producto(ABC):
+    def __init__(self, nombre, precio_base):
+        self.nombre = nombre
+        self.precio_base = precio_base
+
+    def agregar_modificador(self, modificador):
         pass
 
-
-class Mueble:
-    def __init__(self):
+    def calcular_precio_venta(self, usuario):
         pass
 
-class Indumentaria:
-    def __init__(self):
+    def puede_ser_comprado_por(self, usuario):
         pass
 
-class BebidaAlcoholica:
-    def __init__(self):
+class Mueble(Producto):
+    def calcular_precio_venta(self, usuario):
         pass
 
-class Modificador:
-    def __init__(self):
+class Indumentaria(Producto):
+    pass
+
+class BebidaAlcoholica(Producto):
+    def puede_ser_comprado_por(self, usuario):
         pass
 
-class Promocion:
-    def __init__(self):
+class ModificadorEstrategia(ABC):
+    def aplicar_modificacion(self, precio, usuario):
         pass
 
+class Promocion(ModificadorEstrategia):
+    def __init__(self, porcentaje):
+        self.porcentaje = porcentaje
 
-class Pesado:
-    def __init__(self):
+    def aplicar_modificacion(self, precio, usuario):
         pass
 
+class Pesado(ModificadorEstrategia):
+    def aplicar_modificacion(self, precio, usuario):
+        pass
 
-class TaxFree:
-    def __init__(self):
+class TaxFree(ModificadorEstrategia):
+    def aplicar_modificacion(self, precio, usuario):
         pass

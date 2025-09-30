@@ -6,21 +6,17 @@ class Usuario:
         self.puntos = puntos
         self.es_extranjero = es_extranjero
 
-
-    def agregar_al_carrito(self, producto):
-        pass
-    
-    def cargar_saldo(self, monto):
-        pass
-
-    def realizar_compra(self):
+    def _calcular_nivel(self):
         pass
 
     def actualizar_nivel(self):
         pass
 
-    def calcular_nivel(self):
+    def agregar_al_carrito(self, producto):
         pass
 
+    def cargar_saldo(self, monto):
+        pass
 
-  
+    def realizar_compra(self):
+        pass
