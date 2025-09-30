@@ -29,16 +29,38 @@ class MockUsuario:
         self.puntos = puntos
         self.es_extranjero = es_extranjero
         self.carrito = []
-        self.nivel = ""
+        self.nivel = self.calcular_nivel()
+
+    def calcular_nivel(self):
+       pass
 
     def actualizar_nivel(self):
-        pass
+        self.nivel = self.calcular_nivel()
 
     def agregar_al_carrito(self, producto):
-        pass
+        self.carrito.append(producto)
+
+    def cargar_saldo(self, monto):
+        self.saldo += monto
 
     def realizar_compra(self):
-        pass
+        total = 0
+        for producto in self.carrito:
+            total += producto.calcular_precio_venta(self)
+            #completar
+        pass 
+        self.saldo -= total # debitar el monto de su saldo;
+        puntos_ganados = total * 0.1 
+        self.puntos += puntos_ganados # acreditar puntos equivalentes al 10% del valor pagado;
+        self.actualizar_nivel()  # Luego de cada compra se actualiza el nivel del usuario.
+        self.carrito = [] #vaciar el carrito.
+        return puntos_ganados
+    
+    def aplicar_morosidad(self):
+        if self.saldo < 0:
+            self.puntos -= 100
+            self.actualizar_nivel()
+
 
 #1)Probar que un mueble pesado, tax-free y de promoción muestre etiqueta correcta.
 def test_mueble_pesado_taxfree_promocion_etiqueta():

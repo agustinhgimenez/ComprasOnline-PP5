@@ -23,23 +23,22 @@ class Producto(ABC):
 class Mueble(Producto):
     def calcular_precio_venta(self, usuario):
         precio = super().calcular_precio_venta(usuario)
-        return precio + 1000
+        return precio + 1000  #recargo fijo 1000
 
 #Clase Indumentaria
 class Indumentaria(Producto):
-    pass
+    pass  #sin recargos
 
 #Clase Bebida Alcoholica
-class BebidaAlcoholica(Producto):
+class BebidaAlcoholica(Producto):  #Solo compradas por usuarios mayores de 18 años
     def puede_ser_comprado_por(self, usuario):
-        return usuario.edad >= 18
+        return usuario.edad >= 18 
 
 #Patron Strategy - Modificador - Clase Abstracta
 class ModificadorEstrategia(ABC):
     @abstractmethod
     def aplicar_modificador(self, precio, usuario):
         pass
-
 
 class Promocion(ModificadorEstrategia):
     def __init__(self, porcentaje):
