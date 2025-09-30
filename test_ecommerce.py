@@ -40,8 +40,6 @@ class MockUsuario:
     def realizar_compra(self):
         pass
 
-
-
 #1)Probar que un mueble pesado, tax-free y de promoción muestre etiqueta correcta.
 def test_mueble_pesado_taxfree_promocion_etiqueta():
     pass

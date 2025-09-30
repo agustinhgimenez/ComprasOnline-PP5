@@ -32,3 +32,8 @@ class Usuario:
         self.actualizar_nivel()
         self.carrito = []
         return puntos_ganados
+    
+    def aplicar_morosidad(self):
+        if self.saldo < 0:
+            self.puntos -= 100
+            self.actualizar_nivel()

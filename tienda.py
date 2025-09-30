@@ -20,4 +20,5 @@ class Tienda:
         #usuario es menor y lleva bebidas alcohólicas se las retira del carrito y las pone nuevamente en los productos disponibles.
 
     def gestionar_morosidad(self):
-       pass #completar aplica descuento de 100 puntos a los usuarios con saldo negativo.
+        for usuario in self.usuarios:
+            usuario.aplicar_morosidad()
