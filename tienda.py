@@ -18,4 +18,4 @@ class Tienda:
            pass #Completar
 
     def gestionar_morosidad(self):
-       pass
+       pass #completar
