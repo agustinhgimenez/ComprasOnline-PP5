@@ -57,7 +57,7 @@ def test_mueble_pesado_precio():
 
 #3) Probar que usuario Bronce con 1 y $5000 de saldo cuando compra una mochila sumaria 1000 puntos y quedaría con saldo en $0.
 def test_usuario_bronce_compra_mochila():
-    usuario3 = Usuario("Carlos", 20, 5000, 0, False)
+    usuario3 = MockUsuario("Carlos", 20, 5000, 0, False)
     mochila3 = MockProducto("Mochila", 5000)
     usuario3.agregar_al_carrito(mochila3)
     usuario3.realizar_compra()
@@ -66,11 +66,17 @@ def test_usuario_bronce_compra_mochila():
 
 #4) Probar que el negocio aplique correctamente la penalización de morosidad.
 def test_aplicar_morosidad():
-    pass
+    usuario4 = MockUsuario("Luis", 25, -100, 6000, False)
+    usuario4.aplicar_morosidad()
+    assert usuario.puntos == 5900
 
 #5) Probar que usuario Bronce con 1 punto pase a Plata al darle 5000 puntos.
 def test_usuario_bronce_a_plata():
-    pass
+    usuario5 = MockUsuario("Maria", 22, 10000, 4900, False)
+    producto5 = MockProducto("Libro", 1000)
+    usuario5.agregar_al_carrito(producto5)
+    usuario5.realizar_compra()
+    #falta assert
 
 #6) Probar que usuario Bronce con saldo de $4999 no puede comprar una mochila de $5000
 def test_usuario_bronce_saldo_insuficiente():
