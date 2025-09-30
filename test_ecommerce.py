@@ -1,38 +1,25 @@
 import pytest
-from inmuebles import Casa, PH, Departamento
-from estrategia_comision import EstrategiaAlquiler, EstrategiaVenta
-from operacion import Operacion
-from agente import Agente
-from inmobiliaria import Inmobiliaria
+from productos import Mueble, BebidaAlcoholica, Promocion, Pesado, TaxFree
+from usuarios import Usuario
+from tienda import Tienda
 
 
-class MockInmueble:
-    def __init__(self, valor):
-        self.valor = valor
+class MockProducto:
+    def __init__(self, nombre, precio_base):
+        self.nombre = nombre
+        self.precio_base = precio_base
+        self.modificadores = []
 
-    def calcular_valor(self):
-        return self.valor
+    def agregar_modificador(self, modificador):
+        self.modificadores.append(modificador)
+
+    def calcular_precio_venta(self, usuario):
+        precio = self.precio_base
+        for modificador in self.modificadores:
+            precio = modificador.aplicar_modificador(precio, usuario)
+        return precio
+
+    def puede_ser_comprado_por(self, usuario):
+        return True
 
 
-class MockEstrategiaComision:
-    def __init__(self, comision_fija):
-        self.comision_fija = comision_fija
-
-    def calcular_comision(self, inmueble):
-        return self.comision_fija
-
-
-class TestInmuebles:
-    pass
-
-class TestEstrategiaComision:
-    pass
-
-class TestOperacion:
-    pass
-
-class TestAgente:
-    pass
-
-class TestInmobiliaria:
-    pass
