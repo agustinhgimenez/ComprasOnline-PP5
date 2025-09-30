@@ -25,12 +25,12 @@ class Usuario:
         for producto in self.carrito:
             total += producto.calcular_precio_venta(self)
             #completar
-        pass
-        self.saldo -= total
-        puntos_ganados = total * 0.1
-        self.puntos += puntos_ganados
-        self.actualizar_nivel()
-        self.carrito = []
+        pass 
+        self.saldo -= total # debitar el monto de su saldo;
+        puntos_ganados = total * 0.1 
+        self.puntos += puntos_ganados # acreditar puntos equivalentes al 10% del valor pagado;
+        self.actualizar_nivel()  # Luego de cada compra se actualiza el nivel del usuario.
+        self.carrito = [] #vaciar el carrito.
         return puntos_ganados
     
     def aplicar_morosidad(self):
