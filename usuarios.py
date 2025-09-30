@@ -6,13 +6,13 @@ class Usuario:
         self.puntos = puntos
         self.es_extranjero = es_extranjero
         self.carrito = []
-        self.nivel = self._calcular_nivel()
+        self.nivel = self.calcular_nivel()
 
-    def _calcular_nivel(self):
+    def calcular_nivel(self):
        pass
 
     def actualizar_nivel(self):
-        self.nivel = self._calcular_nivel()
+        self.nivel = self.calcular_nivel()
 
     def agregar_al_carrito(self, producto):
         self.carrito.append(producto)
@@ -24,6 +24,7 @@ class Usuario:
         total = 0
         for producto in self.carrito:
             total += producto.calcular_precio_venta(self)
+            #completar
         pass
         self.saldo -= total
         puntos_ganados = total * 0.1
