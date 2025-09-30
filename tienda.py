@@ -1,15 +1,21 @@
+from productos import BebidaAlcoholica
+
+
 class Tienda:
     def __init__(self):
-        pass
+        self.usuarios = []
+        self.productos = []
 
     def agregar_usuario(self, usuario):
-        pass
+        self.usuarios.append(usuario)
 
     def agregar_producto(self, producto):
-        pass
+        self.productos.append(producto)
 
     def gestionar_venta(self, usuario):
-        pass
+        productos_a_remover = []
+        for producto in usuario.carrito:
+           pass #Completar
 
     def gestionar_morosidad(self):
-        pass
+       pass
