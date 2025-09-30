@@ -133,8 +133,8 @@ def test_usuario_bronce_actualizacion_plata():
 #10) Realizar un test automático que valide el siguiente escenario: un usuario Bronce no puede al mismo tiempo agregar mochila y cartuchera al carrito provocando una Excepción.
 def test_usuario_bronce_no_multiples_productos():
     usuario10 = MockUsuario("Tomas", 20, 10000, 0, False)
-    producto10 = MockProducto("Mochila", 5000)
-    cartuchera10_2 = MockProducto("Cartuchera", 1000)
+    producto10 = MockProducto("Mochila", 1000)
+    cartuchera10_2 = MockProducto("Cartuchera", 500)
     usuario10.agregar_al_carrito(producto10)
     with pytest.raises(Exception):
         usuario10.agregar_al_carrito(cartuchera10_2)
