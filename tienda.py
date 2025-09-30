@@ -24,7 +24,6 @@ class Tienda:
             self.productos.append(producto)
         usuario.realizar_compra()
         
-        
     def gestionar_morosidad(self):
         for usuario in self.usuarios:
             usuario.aplicar_morosidad()
