@@ -29,7 +29,7 @@ class MockUsuario:
         self.puntos = puntos
         self.es_extranjero = es_extranjero
         self.carrito = []
-        self.nivel = "Bronce"
+        self.nivel = ""
 
     def actualizar_nivel(self):
         pass
@@ -40,7 +40,7 @@ class MockUsuario:
     def realizar_compra(self):
         pass
 
-usuario = MockUsuario("Agustin",27,100000,0,False) # Agustin , 27 años , saldo 100 mil , puntos 0 , no es extranjero
+
 
 #1)Probar que un mueble pesado, tax-free y de promoción muestre etiqueta correcta.
 def test_mueble_pesado_taxfree_promocion_etiqueta():
@@ -49,17 +49,18 @@ def test_mueble_pesado_taxfree_promocion_etiqueta():
 #2) Probar que que un mueble pesado de $60.000 con un 30% de descuento tenga recargo por ser
 #un mueble (con su recargo de $1000), recargo por envío ($3000),
 def test_mueble_pesado_precio():
-    mueble2 = Mueble("Silla",60000) 
-    mueble2.agregar_modificador(Pesado())
-    mueble2.agregar_modificador(Promocion(30))
-    precio = mueble2.calcular_precio_venta(usuario)
+    usuario2 = MockUsuario("Agustin",27,100000,0,False) # Agustin , 27 años , saldo 100 mil , puntos 0 , no es extranjero
+    producto2 = Mueble("Silla",60000) 
+    producto2.agregar_modificador(Pesado())
+    producto2.agregar_modificador(Promocion(30))
+    precio = producto2.calcular_precio_venta(usuario2)
     assert precio == pytest.approx(60000* 0.7 + 1000 + 3000)
 
 #3) Probar que usuario Bronce con 1 y $5000 de saldo cuando compra una mochila sumaria 1000 puntos y quedaría con saldo en $0.
 def test_usuario_bronce_compra_mochila():
     usuario3 = MockUsuario("Carlos", 20, 5000, 0, False)
-    mochila3 = MockProducto("Mochila", 5000)
-    usuario3.agregar_al_carrito(mochila3)
+    producto3 = MockProducto("Mochila", 5000)
+    usuario3.agregar_al_carrito(producto3)
     usuario3.realizar_compra()
     assert usuario3.puntos == 500
     assert usuario3.saldo == 0
@@ -68,7 +69,7 @@ def test_usuario_bronce_compra_mochila():
 def test_aplicar_morosidad():
     usuario4 = MockUsuario("Luis", 25, -100, 6000, False)
     usuario4.aplicar_morosidad()
-    assert usuario.puntos == 5900
+    assert usuario4.puntos == 5900
 
 #5) Probar que usuario Bronce con 1 punto pase a Plata al darle 5000 puntos.
 def test_usuario_bronce_a_plata():
@@ -80,13 +81,17 @@ def test_usuario_bronce_a_plata():
 
 #6) Probar que usuario Bronce con saldo de $4999 no puede comprar una mochila de $5000
 def test_usuario_bronce_saldo_insuficiente():
-    pass
+    usuario6 = MockUsuario("Pedro", 20, 4999, 0, False)
+    producto6 = MockProducto("Mochila", 5000)
+    usuario6.agregar_al_carrito(producto6)
+    with pytest.raises(Exception):
+        usuario6.realizar_compra()
 
 #7) Probar que usuario menor de 18 años no puede comprar una botella de cerveza por más que le alcance su saldo.
 def test_usuario_menor_no_compra_bebida():
     usuario7=MockUsuario("Nino", 17, 10000, 0, False)
-    cerveza = BebidaAlcoholica("Cerveza", 200)
-    usuario7.agregar_al_carrito(cerveza)
+    producto7 = BebidaAlcoholica("Cerveza", 200)
+    usuario7.agregar_al_carrito(producto7)
 
 #8) Probar que un usuario extranjero puede aprovechar el beneficio tax-free (sin IVA).
 def test_usuario_extranjero_taxfree():
@@ -108,8 +113,8 @@ def test_usuario_bronce_actualizacion_plata():
 #10) Realizar un test automático que valide el siguiente escenario: un usuario Bronce no puede al mismo tiempo agregar mochila y cartuchera al carrito provocando una Excepción.
 def test_usuario_bronce_no_multiples_productos():
     usuario10 = MockUsuario("Tomas", 20, 10000, 0, False)
-    mochila10 = MockProducto("Mochila", 5000)
-    cartuchera10 = MockProducto("Cartuchera", 1000)
-    usuario.agregar_al_carrito(mochila10)
+    producto10 = MockProducto("Mochila", 5000)
+    cartuchera10_2 = MockProducto("Cartuchera", 1000)
+    usuario10.agregar_al_carrito(producto10)
     with pytest.raises(Exception):
-        usuario.agregar_al_carrito(cartuchera10)
+        usuario10.agregar_al_carrito(cartuchera10_2)
