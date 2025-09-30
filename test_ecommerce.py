@@ -73,8 +73,8 @@ def test_mueble_pesado_precio():
     producto2 = Mueble("Silla",60000) 
     producto2.agregar_modificador(Pesado())
     producto2.agregar_modificador(Promocion(30))
-    precio = producto2.calcular_precio_venta(usuario2)
-    assert precio == pytest.approx(60000* 0.7 + 1000 + 3000)
+    precio2 = producto2.calcular_precio_venta(usuario2)
+    assert precio2 == pytest.approx(60000* 0.7 + 1000 + 3000)
 
 #3) Probar que usuario Bronce con 1 y $5000 de saldo cuando compra una mochila sumaria 1000 puntos y quedaría con saldo en $0.
 def test_usuario_bronce_compra_mochila():
